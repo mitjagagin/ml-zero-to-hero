@@ -1,0 +1,9 @@
+name,age,salary,city,department,churn
+Ivan,25,50000,Moscow,IT,0
+Olga,34,78000,SPb,Marketing,1
+Petr,29,62000,Moscow,IT,0
+Anna,45,90000,SPb,Management,1
+Sergey,23,45000,Moscow,IT,0
+Elena,28,55000,SPb,Marketing,0
+Dmitry,38,82000,Moscow,IT,1
+Maria,31,71000,SPb,Management,0
