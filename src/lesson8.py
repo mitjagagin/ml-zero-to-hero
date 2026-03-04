@@ -10,10 +10,11 @@ Date: 2025
 GitHub: https://github.com/mitjagagin/ml-zero-to-hero
 """
 
-import pandas as pd
 import json
 from datetime import datetime
 from typing import Any, Dict
+
+import pandas as pd
 
 
 # =============================================================================

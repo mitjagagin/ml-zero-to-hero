@@ -10,8 +10,9 @@ Date: 2025
 GitHub: https://github.com/mitjagagin/ml-zero-to-hero
 """
 
-import numpy as np
 from datetime import datetime
+
+import numpy as np
 
 
 # =============================================================================
