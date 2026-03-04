@@ -1,52 +1,65 @@
-# src/lesson8.py
+# -*- coding: utf-8 -*-
+"""
+Lesson 8: Pandas — Tabular Data Analysis.
+
+Восьмой урок курса ML Zero to Hero.
+Демонстрация работы с таблицами данных через библиотеку Pandas.
+
+Author: Dmitry
+Date: 2025
+GitHub: https://github.com/mitjagagin/ml-zero-to-hero
+"""
+
 import pandas as pd
-
-# 1. Загрузка данных
-df = pd.read_csv('src/data_employees.csv')
-
-# 2. Просмотр данных
-print("=== Первые 5 строк ===")
-print(df.head())
-
-print("\n=== Информация о данных ===")
-print(f"Размер таблицы: {df.shape}")
-print(f"Столбцы: {list(df.columns)}")
-
-# TODO 1: Посчитай среднюю зарплату по всем сотрудникам
-avg_salary = df["salary"].mean()  # Замени на формулу
-
-# TODO 2: Посчитай среднюю зарплату по городам (groupby)
-city_salary = df.groupby("city")["salary"].mean()  # Замени на формулу
-
-# TODO 3: Найди сотрудников с зарплатой больше 60000
-high_salary = df[df["salary"] > 60000]  # Замени на формулу
-
-# TODO 4: Посчитай сколько человек уволилось (churn = 1)
-churn_count = (df["churn"] == 1).sum()  # Замени на формулу (используй value_counts или sum)
-
-# TODO 5: Посчитай долю оттока (churn_rate)
-churn_rate = churn_count / df.shape[0]  # Замени на формулу
-
-# TODO 6: Сохрани результат в JSON
-report = {
-    'total_employees': int(df.shape[0]),
-    'avg_salary': float(avg_salary),
-    'churn_count': int(churn_count),
-    'churn_rate': float(churn_rate)
-}
-
-# Используем json для сохранения (ты уже умеешь из урока 6)
 import json
-with open('src/report_employees.json', 'w', encoding='utf-8') as f:
-    json.dump(report, f, indent=4, ensure_ascii=False)
+from datetime import datetime
 
-# Вывод результатов
-print("\n=== Результаты анализа ===")
-print(f"Средняя зарплата: {avg_salary}")
-print(f"\nСредняя зарплата по городам:")
-print(city_salary)
-print(f"\nСотрудники с зарплатой > 60000:")
-print(high_salary[['name', 'salary', 'city']])
-print(f"\nУволилось человек: {churn_count}")
-print(f"Доля оттока: {churn_rate:.2%}")
-print("\nОтчет сохранен в report_employees.json")
+
+# =============================================================================
+# ТОЧКА ВХОДА
+# =============================================================================
+if __name__ == "__main__":
+    # 1. Загрузка данных
+    df = pd.read_csv('src/data_employees.csv')
+    
+    print("=" * 50)
+    print("АНАЛИЗ ДАННЫХ СОТРУДНИКОВ (Pandas)")
+    print("=" * 50)
+    print()
+    
+    # 2. Просмотр
+    print(f"Размер таблицы: {df.shape}")
+    print(f"Столбцы: {list(df.columns)}")
+    print()
+    
+    # 3. Расчеты
+    avg_salary = df['salary'].mean()
+    city_salary = df.groupby('city')['salary'].mean()
+    high_salary = df[df['salary'] > 60000]
+    churn_count = df['churn'].sum()
+    churn_rate = churn_count / df.shape[0]
+    
+    # 4. Сохранение отчета
+    report = {
+        'total_employees': int(df.shape[0]),
+        'avg_salary': float(avg_salary),
+        'churn_count': int(churn_count),
+        'churn_rate': float(churn_rate)
+    }
+    
+    with open('src/report_employees.json', 'w', encoding='utf-8') as f:
+        json.dump(report, f, indent=4, ensure_ascii=False)
+    
+    # 5. Вывод
+    print(f"Средняя зарплата: {avg_salary:.1f}")
+    print(f"\nСредняя зарплата по городам:")
+    print(city_salary)
+    print(f"\nСотрудники с зарплатой > 60000:")
+    print(high_salary[['name', 'salary', 'city']])
+    print(f"\nУволилось человек: {churn_count}")
+    print(f"Доля оттока: {churn_rate:.1%}")
+    print("\nОтчет сохранен в report_employees.json")
+    print("=" * 50)
+    
+    # 6. Логирование
+    print(f"\n[INFO] Скрипт выполнен успешно в {datetime.now().strftime('%H:%M:%S')}")
