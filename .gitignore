@@ -1,8 +1,23 @@
+# Python
 __pycache__/
-*.pyc
-.env
-.DS_Store
-data/raw/*
-!data/raw/.gitkeep
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
 venv/
-*.ipynb_checkpoints
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Данные (опционально - можно не пушить большие файлы)
+# src/report*.json
+# src/data*.csv
