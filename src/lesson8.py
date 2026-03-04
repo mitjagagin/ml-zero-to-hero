@@ -13,6 +13,7 @@ GitHub: https://github.com/mitjagagin/ml-zero-to-hero
 import pandas as pd
 import json
 from datetime import datetime
+from typing import Any, Dict
 
 
 # =============================================================================
@@ -20,7 +21,7 @@ from datetime import datetime
 # =============================================================================
 if __name__ == "__main__":
     # 1. Загрузка данных
-    df = pd.read_csv('src/data_employees.csv')
+    df: pd.DataFrame = pd.read_csv('src/data_employees.csv')
     
     print("=" * 50)
     print("АНАЛИЗ ДАННЫХ СОТРУДНИКОВ (Pandas)")
@@ -33,14 +34,14 @@ if __name__ == "__main__":
     print()
     
     # 3. Расчеты
-    avg_salary = df['salary'].mean()
-    city_salary = df.groupby('city')['salary'].mean()
-    high_salary = df[df['salary'] > 60000]
-    churn_count = df['churn'].sum()
-    churn_rate = churn_count / df.shape[0]
+    avg_salary: float = df['salary'].mean()
+    city_salary: pd.Series = df.groupby('city')['salary'].mean()
+    high_salary: pd.DataFrame = df[df['salary'] > 60000]
+    churn_count: int = int(df['churn'].sum())
+    churn_rate: float = churn_count / df.shape[0]
     
     # 4. Сохранение отчета
-    report = {
+    report: Dict[str, Any] = {
         'total_employees': int(df.shape[0]),
         'avg_salary': float(avg_salary),
         'churn_count': int(churn_count),

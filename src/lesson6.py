@@ -13,6 +13,7 @@ GitHub: https://github.com/mitjagagin/ml-zero-to-hero
 import csv
 import json
 from datetime import datetime
+from typing import Any, Dict, List
 
 
 # =============================================================================
@@ -20,34 +21,33 @@ from datetime import datetime
 # =============================================================================
 if __name__ == "__main__":
     # 1. Загрузка данных из CSV
-    data = []
+    data: List[Dict[str, str]] = []
     with open("src/data.csv", "r", encoding="utf-8") as file:
         reader = csv.DictReader(file)
         for row in reader:
             data.append(row)
     
     # 2. Подсчет статистики
-    total = len(data)
-    sum_age = 0
-    sum_salary = 0
-    churn_count = 0
+    total: int = len(data)
+    sum_age: float = 0
+    sum_salary: float = 0
+    churn_count: int = 0
     
     for row in data:
-        # Преобразование строк в числа (CSV читает всё как текст)
-        age = int(row["age"])
-        salary = float(row["salary"])
-        churn = int(row["churn"])
+        age: int = int(row["age"])
+        salary: float = float(row["salary"])
+        churn: int = int(row["churn"])
         
         sum_age += age
         sum_salary += salary
         churn_count += churn
     
-    avg_age = sum_age / total
-    avg_salary = sum_salary / total
-    churn_rate = churn_count / total
+    avg_age: float = sum_age / total
+    avg_salary: float = sum_salary / total
+    churn_rate: float = churn_count / total
     
     # 3. Сохранение отчета в JSON
-    report = {
+    report: Dict[str, Any] = {
         "total_records": total,
         "avg_age": avg_age,
         "avg_salary": avg_salary,

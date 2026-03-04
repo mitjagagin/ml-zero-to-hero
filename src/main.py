@@ -21,12 +21,12 @@ from metrics import get_model_report
 # =============================================================================
 if __name__ == "__main__":
     # Дата и время
-    now = datetime.now()
-    timestamp = now.strftime("%Y-%m-%d %H:%M:%S")
+    now: datetime = datetime.now()
+    timestamp: str = now.strftime("%Y-%m-%d %H:%M:%S")
     
     # Данные
-    y_true = [1, 0, 1, 1, 0, 1, 0, 0]
-    y_pred = [1, 0, 0, 1, 0, 1, 1, 0]
+    y_true: list[int] = [1, 0, 1, 1, 0, 1, 0, 0]
+    y_pred: list[int] = [1, 0, 0, 1, 0, 1, 1, 0]
     
     # Отчет
     report: Dict[str, float] = get_model_report(
