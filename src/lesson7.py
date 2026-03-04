@@ -19,7 +19,6 @@ import numpy as np
 # ТОЧКА ВХОДА
 # =============================================================================
 if __name__ == "__main__":
-    # Данные
     salaries: np.ndarray = np.array([50000, 78000, 62000, 90000, 45000, 55000, 82000, 71000])
     ages: np.ndarray = np.array([25, 34, 29, 45, 23, 28, 38, 31])
     
@@ -27,21 +26,17 @@ if __name__ == "__main__":
     print("АНАЛИЗ ЗАРПЛАТ (NumPy)")
     print("=" * 50)
     
-    # Расчеты
     avg_salary: float = np.mean(salaries)
     median_salary: float = np.median(salaries)
     max_salary: float = np.max(salaries)
     min_salary: float = np.min(salaries)
     std_salary: float = np.std(salaries)
     
-    # Индекс максимальной зарплаты
     max_index: int = int(np.argmax(salaries))
     max_salary_age: int = int(ages[max_index])
     
-    # Фильтрация
     high_salaries: np.ndarray = salaries[salaries > 60000]
     
-    # Вывод
     print(f"Средняя зарплата: {avg_salary:.1f}")
     print(f"Медианная зарплата: {median_salary:.1f}")
     print(f"Максимальная зарплата: {max_salary}")
@@ -51,5 +46,4 @@ if __name__ == "__main__":
     print(f"Стандартное отклонение: {std_salary:.1f}")
     print("=" * 50)
     
-    # Логирование
     print(f"\n[INFO] Скрипт выполнен успешно в {datetime.now().strftime('%H:%M:%S')}")

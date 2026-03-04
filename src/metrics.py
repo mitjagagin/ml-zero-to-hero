@@ -16,13 +16,12 @@ Date: 2025
 GitHub: https://github.com/mitjagagin/ml-zero-to-hero
 """
 
-from typing import List, Dict
+from typing import Any, Dict
 
 
-def calculate_accuracy(y_true: List[int], y_pred: List[int]) -> float:
+def calculate_accuracy(y_true: list[int], y_pred: list[int]) -> float:
     """
     Вычисляет точность классификации (Accuracy).
-    
     Формула: (Правильные предсказания) / (Все предсказания)
     """
     if len(y_true) != len(y_pred):
@@ -39,17 +38,16 @@ def calculate_accuracy(y_true: List[int], y_pred: List[int]) -> float:
     return correct / len(y_true)
 
 
-def calculate_precision(y_true: List[int], y_pred: List[int]) -> float:
+def calculate_precision(y_true: list[int], y_pred: list[int]) -> float:
     """
     Вычисляет точность положительных предсказаний (Precision).
-    
     Формула: TP / (TP + FP)
     """
     if len(y_true) != len(y_pred):
         raise ValueError("Длины списков должны совпадать")
     
-    tp = 0  # True Positive
-    fp = 0  # False Positive
+    tp = 0
+    fp = 0
     
     for i in range(len(y_true)):
         if y_pred[i] == 1:
@@ -65,13 +63,11 @@ def calculate_precision(y_true: List[int], y_pred: List[int]) -> float:
 
 
 def get_model_report(
-    y_true: List[int],
-    y_pred: List[int],
+    y_true: list[int],
+    y_pred: list[int],
     model_name: str = "MyModel"
-) -> Dict[str, float]:
-    """
-    Формирует отчет с метриками модели.
-    """
+) -> dict[str, float]:
+    """Формирует отчет с метриками модели."""
     return {
         "model": model_name,
         "accuracy": calculate_accuracy(y_true, y_pred),
@@ -79,10 +75,8 @@ def get_model_report(
     }
 
 
-def print_report(report: Dict[str, float]) -> None:
-    """
-    Выводит отчет о метриках в консоль.
-    """
+def print_report(report: dict[str, float]) -> None:
+    """Выводит отчет о метриках в консоль."""
     print("=" * 50)
     print("ОТЧЕТ ПО МЕТРИКАМ МОДЕЛИ")
     print("=" * 50)

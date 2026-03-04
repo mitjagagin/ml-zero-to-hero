@@ -13,27 +13,25 @@ GitHub: https://github.com/mitjagagin/ml-zero-to-hero
 import csv
 import json
 from datetime import datetime
-from typing import Any, Dict, List
 
 
 # =============================================================================
 # ТОЧКА ВХОДА
 # =============================================================================
 if __name__ == "__main__":
-    # 1. Загрузка данных из CSV
-    data: List[Dict[str, str]] = []
+    data: list[dict[str, str]] = []
+    
     with open("src/data.csv", "r", encoding="utf-8") as file:
         reader = csv.DictReader(file)
         for row in reader:
             data.append(row)
     
-    # 2. Подсчет статистики
     total: int = len(data)
     sum_age: float = 0
     sum_salary: float = 0
     churn_count: int = 0
     
-    for row in data:
+    for row in 
         age: int = int(row["age"])
         salary: float = float(row["salary"])
         churn: int = int(row["churn"])
@@ -46,8 +44,7 @@ if __name__ == "__main__":
     avg_salary: float = sum_salary / total
     churn_rate: float = churn_count / total
     
-    # 3. Сохранение отчета в JSON
-    report: Dict[str, Any] = {
+    report: dict[str, float] = {
         "total_records": total,
         "avg_age": avg_age,
         "avg_salary": avg_salary,
@@ -57,11 +54,9 @@ if __name__ == "__main__":
     with open("src/report.json", "w", encoding="utf-8") as file:
         json.dump(report, file, indent=4, ensure_ascii=False)
     
-    # 4. Вывод
     print("Отчет сохранен в report.json")
     print(f"Средний возраст: {avg_age:.1f}")
     print(f"Средняя зарплата: {avg_salary:.1f}")
     print(f"Доля оттока: {churn_rate:.1%}")
     
-    # 5. Логирование
     print(f"\n[INFO] Скрипт выполнен успешно в {datetime.now().strftime('%H:%M:%S')}")

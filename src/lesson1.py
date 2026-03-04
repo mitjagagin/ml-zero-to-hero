@@ -42,17 +42,12 @@ def format_greeting(name: str, goal: str, days_experience: int) -> str:
 # ТОЧКА ВХОДА
 # =============================================================================
 if __name__ == "__main__":
-    # Входные данные
     user_name: str = "Dmitry"
     learning_goal: str = "Middle ML Engineer"
     months_on_vakhta: int = 12
     
-    # Вычисления
     day_experience: int = calculate_experience_days(months_on_vakhta)
-    
-    # Вывод
     greeting: str = format_greeting(user_name, learning_goal, day_experience)
-    print(greeting)
     
-    # Логирование
+    print(greeting)
     print(f"\n[INFO] Скрипт выполнен успешно в {datetime.now().strftime('%H:%M:%S')}")
