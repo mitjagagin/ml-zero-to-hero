@@ -20,6 +20,7 @@ import pandas as pd
 # ТОЧКА ВХОДА
 # =============================================================================
 if __name__ == "__main__":
+    # 1. Загрузка данных из CSV в DataFrame (таблица)
     df: pd.DataFrame = pd.read_csv('src/data_employees.csv')
     
     print("=" * 50)
@@ -27,16 +28,19 @@ if __name__ == "__main__":
     print("=" * 50)
     print()
     
-    print(f"Размер таблицы: {df.shape}")
-    print(f"Столбцы: {list(df.columns)}")
+    # 2. Просмотр информации о таблице
+    print(f"Размер таблицы: {df.shape}")         # (строки, столбцы)
+    print(f"Столбцы: {list(df.columns)}")        # Названия столбцов
     print()
     
-    avg_salary: float = df['salary'].mean()
-    city_salary: pd.Series = df.groupby('city')['salary'].mean()
-    high_salary: pd.DataFrame = df[df['salary'] > 60000]
-    churn_count: int = int(df['churn'].sum())
-    churn_rate: float = churn_count / df.shape[0]
+    # 3. Расчет статистики
+    avg_salary: float = df['salary'].mean()                  # Средняя зарплата
+    city_salary: pd.Series = df.groupby('city')['salary'].mean()  # По городам
+    high_salary: pd.DataFrame = df[df['salary'] > 60000]     # Фильтрация
+    churn_count: int = int(df['churn'].sum())                # Сумма единиц
+    churn_rate: float = churn_count / df.shape[0]            # Доля оттока
     
+    # 4. Сохранение отчета в JSON
     report: dict[str, float] = {
         'total_employees': int(df.shape[0]),
         'avg_salary': float(avg_salary),
@@ -47,6 +51,7 @@ if __name__ == "__main__":
     with open('src/report_employees.json', 'w', encoding='utf-8') as f:
         json.dump(report, f, indent=4, ensure_ascii=False)
     
+    # 5. Вывод результатов
     print(f"Средняя зарплата: {avg_salary:.1f}")
     print(f"\nСредняя зарплата по городам:")
     print(city_salary)
@@ -57,4 +62,5 @@ if __name__ == "__main__":
     print("\nОтчет сохранен в report_employees.json")
     print("=" * 50)
     
+    # 6. Логирование выполнения
     print(f"\n[INFO] Скрипт выполнен успешно в {datetime.now().strftime('%H:%M:%S')}")

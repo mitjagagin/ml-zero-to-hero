@@ -19,6 +19,8 @@ from datetime import datetime
 # ТОЧКА ВХОДА
 # =============================================================================
 if __name__ == "__main__":
+    # 1. Загрузка данных из CSV файла
+    # CSV читает все значения как строки, даже числа
     data: list[dict[str, str]] = []
     
     with open("src/data.csv", "r", encoding="utf-8") as file:
@@ -26,12 +28,14 @@ if __name__ == "__main__":
         for row in reader:
             data.append(row)
     
+    # 2. Подсчет статистики
     total: int = len(data)
     sum_age: float = 0
     sum_salary: float = 0
     churn_count: int = 0
     
-    for row in 
+    for row in data:  # ← ИСПРАВЛЕНО: добавлено "data"
+        # Преобразование строк в числа (CSV читает всё как текст!)
         age: int = int(row["age"])
         salary: float = float(row["salary"])
         churn: int = int(row["churn"])
@@ -40,10 +44,12 @@ if __name__ == "__main__":
         sum_salary += salary
         churn_count += churn
     
+    # Расчет средних значений
     avg_age: float = sum_age / total
     avg_salary: float = sum_salary / total
     churn_rate: float = churn_count / total
     
+    # 3. Сохранение отчета в JSON
     report: dict[str, float] = {
         "total_records": total,
         "avg_age": avg_age,
@@ -54,9 +60,10 @@ if __name__ == "__main__":
     with open("src/report.json", "w", encoding="utf-8") as file:
         json.dump(report, file, indent=4, ensure_ascii=False)
     
+    # 4. Вывод результатов
     print("Отчет сохранен в report.json")
     print(f"Средний возраст: {avg_age:.1f}")
     print(f"Средняя зарплата: {avg_salary:.1f}")
     print(f"Доля оттока: {churn_rate:.1%}")
     
-    print(f"\n[INFO] Скрипт выполнен успешно в {datetime.now().strftime('%H:%M:%S')}")
+    #

@@ -19,6 +19,7 @@ import numpy as np
 # ТОЧКА ВХОДА
 # =============================================================================
 if __name__ == "__main__":
+    # Создание массивов NumPy (быстрее списков Python)
     salaries: np.ndarray = np.array([50000, 78000, 62000, 90000, 45000, 55000, 82000, 71000])
     ages: np.ndarray = np.array([25, 34, 29, 45, 23, 28, 38, 31])
     
@@ -26,17 +27,21 @@ if __name__ == "__main__":
     print("АНАЛИЗ ЗАРПЛАТ (NumPy)")
     print("=" * 50)
     
-    avg_salary: float = np.mean(salaries)
-    median_salary: float = np.median(salaries)
-    max_salary: float = np.max(salaries)
-    min_salary: float = np.min(salaries)
-    std_salary: float = np.std(salaries)
+    # Векторные операции (без циклов!)
+    avg_salary: float = np.mean(salaries)      # Среднее значение
+    median_salary: float = np.median(salaries) # Медиана
+    max_salary: float = np.max(salaries)       # Максимум
+    min_salary: float = np.min(salaries)       # Минимум
+    std_salary: float = np.std(salaries)       # Стандартное отклонение
     
-    max_index: int = int(np.argmax(salaries))
-    max_salary_age: int = int(ages[max_index])
+    # Поиск индекса максимальной зарплаты
+    max_index: int = int(np.argmax(salaries))  # Индекс максимума
+    max_salary_age: int = int(ages[max_index]) # Возраст по индексу
     
+    # Фильтрация массива (векторная операция)
     high_salaries: np.ndarray = salaries[salaries > 60000]
     
+    # Вывод результатов
     print(f"Средняя зарплата: {avg_salary:.1f}")
     print(f"Медианная зарплата: {median_salary:.1f}")
     print(f"Максимальная зарплата: {max_salary}")
@@ -46,4 +51,5 @@ if __name__ == "__main__":
     print(f"Стандартное отклонение: {std_salary:.1f}")
     print("=" * 50)
     
+    # Логирование выполнения
     print(f"\n[INFO] Скрипт выполнен успешно в {datetime.now().strftime('%H:%M:%S')}")
